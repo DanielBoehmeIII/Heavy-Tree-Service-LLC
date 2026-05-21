@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+
+.DS_Store
+*.log
+
+graphify-out-code/
+graphify-out-default-references/
+before-graph.png
+current-graph.png
+current-state.png
+0.8
