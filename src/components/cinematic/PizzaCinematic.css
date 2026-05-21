@@ -1,0 +1,133 @@
+/* ── Section: creates scroll space ───────────────────────────── */
+.pc-section {
+  height: 285vh;
+  position: relative;
+  background: #030201;
+}
+
+.pc-section::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -120px;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #030201 0%, #030201 48%, transparent 100%);
+  z-index: 0;
+}
+
+/* ── Sticky viewport ─────────────────────────────────────────── */
+.pc-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ── Warm dark gradient background ──────────────────────────── */
+.pc-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(56, 27, 12, 0.4) 0%, transparent 65%),
+    linear-gradient(160deg, #160b06 0%, #221109 52%, #0d0704 100%);
+  pointer-events: none;
+}
+
+/* ── Frame image / video — fills viewport ───────────────────── */
+.pc-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  transform: scale(1.002);
+  will-change: opacity;
+}
+
+/* ── Cinematic veil — warm bottom gradient ──────────────────── */
+.pc-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(to top,
+      #030201 0%,
+      rgba(3, 2, 1, 0.96) 8%,
+      rgba(3, 2, 1, 0.62) 26%,
+      rgba(10, 5, 2, 0.08) 52%,
+      transparent 76%
+    ),
+    linear-gradient(to right,
+      rgba(10, 5, 2, 0.58) 0%,
+      rgba(10, 5, 2, 0.18) 34%,
+      transparent 40%
+    );
+}
+
+.pc-end-fade {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 5;
+  height: 66vh;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(3, 2, 1, 0.34) 34%,
+      rgba(3, 2, 1, 0.86) 72%,
+      #030201 100%
+    );
+}
+
+/* ── Main UI (hero content) — above veil ─────────────────────── */
+.pc-main-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  /* opacity managed by rAF loop */
+}
+
+/* ── CTA panel — fades in at end of scroll ──────────────────── */
+.pc-cta-panel {
+  position: absolute;
+  bottom: 14vh;
+  left: 56px;
+  z-index: 8;
+  max-width: 480px;
+  /* opacity/pointer-events managed by rAF loop */
+}
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pc-frame { display: block; opacity: 1 !important; }
+  .pc-main-ui { opacity: 1 !important; }
+  .pc-cta-panel { opacity: 1 !important; pointer-events: auto !important; }
+}
+
+@media (max-width: 768px) {
+  .pc-cta-panel {
+    left: 24px;
+    right: 24px;
+    max-width: 100%;
+    bottom: 10vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .pc-section {
+    height: 300vh;
+  }
+  .pc-cta-panel {
+    bottom: 6vh;
+    left: 18px;
+    right: 18px;
+  }
+}
